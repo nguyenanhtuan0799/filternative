@@ -1,5 +1,5 @@
 import React, {ReactNode} from 'react';
-import {ViewStyle, TextStyle, ImageStyle} from 'react-native';
+import {ViewStyle, TextStyle, ImageStyle, Dimensions} from 'react-native';
 import {
   createTheme,
   createText,
@@ -15,6 +15,7 @@ export const pallette = {
 export const theme = createTheme({
   colors: {
     primary: '#FAAD00',
+    dark: '#000',
     primaryLight: 'rgba(130, 209, 102,  0.2)',
     lightBlue: '#BFEAF5',
     secondary: '#25509E',
@@ -32,6 +33,11 @@ export const theme = createTheme({
     background2: '#171822',
     white: '#ffffff',
   },
+  screenSize: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+
   spacing: {
     z: 0,
     s: 8,
@@ -55,6 +61,13 @@ export const theme = createTheme({
     xxl: 100,
   },
   textVariants: {
+    textFilter: {marginLeft: 'm', fontSize: 14},
+
+    text: {fontSize: 17, fontWeight: 'bold', marginBottom: 'm'},
+    textFoot: {
+      fontSize: 17,
+      color: 'white',
+    },
     defaults: {},
     hero: {
       // fontFamily: 'SFProDisplay-Bold',

@@ -13,6 +13,7 @@ import i18next, {i18nInit} from './utils/i18n';
 import {store} from './redux/store';
 import vi from './fixtures/Languages/vi.json';
 import en from './fixtures/Languages/en.json';
+import {SafeAreaView} from 'react-native';
 
 const languages = {
   vi,

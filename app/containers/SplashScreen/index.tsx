@@ -24,7 +24,7 @@ const SplashScreen = ({navigation}: SplashScreenProps) => {
   useEffect(() => {
     setTimeout(() => {
       navigation.navigate('BottomTabs');
-    }, 10000);
+    }, 1000);
     return () => {
       // eslint-disable-next-line react-hooks/exhaustive-deps
       animation?.current?.reset();

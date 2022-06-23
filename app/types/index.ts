@@ -2,7 +2,7 @@ import {ColorValue} from 'react-native';
 import Animated from 'react-native-reanimated';
 
 export interface SVGProps {
-  color: Animated.Node<string>;
+  color: Animated.Node<string> | string;
   size: number;
 }
 

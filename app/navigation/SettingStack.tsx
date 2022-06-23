@@ -1,7 +1,7 @@
 import * as React from 'react';
 import {createStackNavigator} from '@react-navigation/stack';
 
-import ScreenA from '../containers/ScreenA';
+import SettingScreen from '../containers/SettingScreen';
 
 const Stack = createStackNavigator<any>();
 
@@ -13,7 +13,7 @@ const ExploreStack = () => {
         headerShown: false,
         cardStyle: {backgroundColor: 'transparent'},
       }}>
-      <Stack.Screen name="Settings" component={ScreenA} />
+      <Stack.Screen name="Settings" component={SettingScreen} />
     </Stack.Navigator>
   );
 };

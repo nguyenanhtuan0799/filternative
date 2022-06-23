@@ -15,6 +15,9 @@ const Stack = createStackNavigator<any>();
 
 const NavigationStack = () => {
   const colorScheme = Appearance.getColorScheme();
+  console.log('====================================');
+  console.log(colorScheme);
+  console.log('====================================');
   const isDark = colorScheme === 'dark';
   React.useEffect(() => {
     return () => {

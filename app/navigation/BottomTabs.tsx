@@ -15,7 +15,9 @@ import {
   NotificationSVG,
   SettingSVG,
 } from './NavigationBarIcon';
+
 import {getFocusedRouteNameFromRoute} from '@react-navigation/native';
+import ScreenB from '../containers/ScreenB/ScreenB';
 
 const Tab = createBottomTabNavigator<MainTabsParams>();
 const bubbleBackground = theme.colors.secondary;
@@ -79,38 +81,46 @@ const tabs: TabsConfig<BubbleTabBarItemConfig, MainTabsParams> = {
 };
 
 export default function TabsNavigator() {
-  const setTabBarVisible = (route: any) => {
-    const routeName = getFocusedRouteNameFromRoute(route);
-    const hideOnScreens = ['Booking'];
-    if (hideOnScreens.indexOf(routeName || '') > -1) {
-      return false;
+  const setTabBarVisible = (route: any): 'none' | 'flex' => {
+    let displayTab: 'none' | 'flex' = 'flex';
+    if (Array.isArray(route)) {
+      for (let i = 0; i < route.length; i++) {
+        const routeName = getFocusedRouteNameFromRoute(route[i]);
+        const hideOnScreens = ['ScreenB'];
+        if (hideOnScreens.indexOf(routeName || '') > -1) {
+          displayTab = 'none';
+          break;
+        }
+        displayTab = 'flex';
+      }
     }
-    return true;
+    return displayTab;
   };
+
   return (
-    <Tab.Navigator
-      tabBarOptions={{
-        style: {
-          backgroundColor: theme.colors.background2,
-        },
-      }}
-      tabBar={props => <AnimatedTabBar iconSize={20} tabs={tabs} {...props} />}>
+    <Tab.Navigator>
       <Tab.Screen
         name="TabA"
         initialParams={{
           backgroundColor: tabs.TabA.labelStyle.color,
           nextScreen: 'TabB',
         }}
-        component={ExploreStack}
-        options={({route}) => ({
-          tabBarVisible: setTabBarVisible(route),
-        })}
+        options={{
+          headerShown: false,
+          tabBarIcon: ({size, color}) => <JobSVG size={size} color={color} />,
+        }}
+        component={ScreenB}
       />
       <Tab.Screen
         name="TabB"
         initialParams={{
           backgroundColor: tabs.TabB.labelStyle.color,
           nextScreen: 'TabC',
+        }}
+        options={{
+          tabBarIcon: ({size, color}) => (
+            <ReportSVG size={size} color={color} />
+          ),
         }}
         component={SettingStack}
       />
@@ -120,6 +130,11 @@ export default function TabsNavigator() {
           backgroundColor: tabs.TabC.labelStyle.color,
           nextScreen: 'TabD',
         }}
+        options={{
+          tabBarIcon: ({size, color}) => (
+            <NotificationSVG size={size} color={color} />
+          ),
+        }}
         component={SettingStack}
       />
       <Tab.Screen
@@ -127,6 +142,11 @@ export default function TabsNavigator() {
         initialParams={{
           backgroundColor: tabs.TabD.labelStyle.color,
           nextScreen: 'TabA',
+        }}
+        options={{
+          tabBarIcon: ({size, color}) => (
+            <SettingSVG size={size} color={color} />
+          ),
         }}
         component={SettingStack}
       />
