@@ -7,11 +7,11 @@ import {
   StyleSheet,
   TouchableOpacity,
   View,
+  Platform,
 } from 'react-native';
 import {SafeAreaView} from 'react-native';
 import FilterChecked from '../../../components/FilterChecked';
 import FilterSwicth from '../../../components/FilterSwitch';
-import Icon from 'react-native-vector-icons/AntDesign';
 import Icon1 from 'react-native-vector-icons/EvilIcons';
 import {Box, Text} from '../../../components';
 
@@ -149,16 +149,20 @@ const ModalFilter = ({modalVisible, setModalVisible}: Props) => {
               <Text style={styles.textStyle}>X</Text>
             </Pressable>
             <View>
-              <Text style={styles.modalText}>Tat ca bo loc</Text>
+              <Text style={styles.modalText}>Tất cả bộ lọc</Text>
             </View>
           </View>
           <ScrollView
-            style={{
-              maxHeight: Dimensions.get('window').height * 0.78,
-            }}>
+            style={
+              Platform.OS === 'ios'
+                ? {
+                    maxHeight: Dimensions.get('window').height * 0.78,
+                  }
+                : {}
+            }>
             <View style={styles.body}>
               <Box marginVertical="s" style={styles.check}>
-                <Text variant="text">Sap Xep</Text>
+                <Text variant="text">Sắp xếp</Text>
                 {sort.map((s, i) => {
                   return (
                     <FilterChecked
@@ -171,7 +175,7 @@ const ModalFilter = ({modalVisible, setModalVisible}: Props) => {
                 })}
               </Box>
               <Box marginVertical="s" style={styles.check}>
-                <Text variant="text">Tu Uber Eats</Text>
+                <Text variant="text">Từ Uber Eats</Text>
                 {uber.map((u, i) => {
                   return (
                     <FilterSwicth
@@ -185,7 +189,7 @@ const ModalFilter = ({modalVisible, setModalVisible}: Props) => {
                 })}
               </Box>
               <Box marginVertical="s" style={styles.check}>
-                <Text variant="text">Phieu giam gia do an</Text>
+                <Text variant="text">Phiếu giảm giá đồ ăn</Text>
                 {ticket.map((t, i) => {
                   return (
                     <FilterChecked
@@ -206,7 +210,7 @@ const ModalFilter = ({modalVisible, setModalVisible}: Props) => {
                 })}
               </Box>
               <Box marginVertical="s" style={styles.check}>
-                <Text variant="text">Che do an</Text>
+                <Text variant="text">Chế độ ăn</Text>
                 {eats.map((t, i) => {
                   return (
                     <FilterChecked
@@ -244,7 +248,7 @@ const ModalFilter = ({modalVisible, setModalVisible}: Props) => {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Text variant="textFoot">Ap Dung</Text>
+                <Text variant="textFoot">Áp dụng</Text>
               </TouchableOpacity>
             </Box>
           </Box>
@@ -278,7 +282,9 @@ const styles = StyleSheet.create({
     height: 20,
   },
   check: {
-    width: Dimensions.get('window').width * 0.9,
+    width: Dimensions.get('window').width,
+
+    paddingHorizontal: 20,
   },
   body: {
     marginTop: 20,
